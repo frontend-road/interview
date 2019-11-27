@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+<script>
+  Object.prototype.a = 'a';
+  Function.prototype.a = 'a1';
+  function Person() {};
+  var yideng = new Person();
+  console.log(Person.a); // a1
+  console.log(yideng.a); // a
+  // yideng.__proto__ === Person.prototype
+  // yideng.__proto__.__proto__ === Object.prototype
+  console.log(yideng.__proto__.__proto__.constructor); // Object
+  // console.log(yideng.__proto__.__proto__.constructor.constructor.constructor);
+  // console.log(1..a);
+  // console.log(1.a);
+</script>
+</body>
+</html>

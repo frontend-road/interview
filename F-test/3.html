@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>eval | new Funvtion | with</title>
+</head>
+<body>
+<script>
+  function Yideng(name) {
+    this.name = name;
+  }
+
+  // var wang = new Yideng('wang');
+  // var li = new Yideng('li');
+  // setTimeout(() => {
+  //   wang = null;
+  // }, 0);
+
+  // 闭包导致内存泄漏，没有引用，野指针（开发者工具--Memory，Distance -）
+  function makeYidengFactory(name) {
+    var p = new Yideng(name);
+    return function() {
+      return p;
+    }
+  }
+  var p1 = makeYidengFactory('zhang');
+  p1();
+  console.log(p1);
+  p1 = null;
+
+  function makeYidengFactory1(name) {
+    var p = new Yideng(name);
+    return {
+      create: function() {
+        return p;
+      },
+      destory: function() {
+        p = null;
+      }
+    };
+  }
+  var p2 = makeYidengFactory1('zhou');
+  p2.create();
+  console.log(p2);
+  p2.destory(); // 只有调用了destory函数才能使得闭包被回收
+  // p2 = null; // 不调用destory函数，仅仅将p2设为null，闭包仍然不会被回收
+</script>
+
+
+<script>
+  // 变量 fruit 会被GC回收么，为什么呢?
+  // 不会被回收，因为eval
+  function test() {
+    var fruit = 'apple';
+    return function() {
+      // eval() 函数会将传入的字符串当做 JavaScript 代码进行执行。
+      // eval 词法语境分析的是否无法预知上下文，因此无法做优化
+      eval('');
+    }
+  }
+  test()();
+</script>
+
+<script>
+  var name = 'hello';
+  function test1() {
+    console.log(test1)
+    return 'console.log(name)';
+  }
+  function init() {
+    var name = 'world';
+    // 直接调用构造函数动态创建函数, Function 构造函数只在全局作用域中运行。
+    var f1 = new Function(test1());
+    var f2 = new Function('console.log(name)');
+    var f3 = new Function(console.log(name));
+    eval('console.log(name)'); // world
+    window.eval('console.log(name)'); // hello
+    f1(); // hello
+    f2(); // hello
+    f3(); // world
+  }
+  init();
+</script>
+
+<script>
+  var a = 1;
+  var b = 2;
+  function test1(str) {
+    var a = 3;
+    eval(str); // 3
+    // window.eval(str); // 1
+    console.log(a, b); // 3 4
+  }
+  test1('var b = 4; console.log(a);');
+
+  console.log('----- eval -----')
+  function test2(str) {
+    'use strict';
+    var a = 3;
+    eval(str); // 3
+    // window.eval(str); // 1
+    console.log(a, b); // 3 2
+  }
+  test2('var b = 4; console.log(a);');
+</script>
+</body>
+</html>

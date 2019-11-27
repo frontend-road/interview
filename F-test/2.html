@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+<script>
+  function fn() {
+    // 'use strict'; // 这里开启严格模式有作用
+    console.log(this.length);
+  }
+  var yideng = {
+    length: 5,
+    method: function() {
+      'use strict'; // 这里开启严格模式没有作用
+      fn(); // 0
+      arguments[0](); // 2
+    }
+  }
+  const result = yideng.method.bind(null);
+  result(fn, 1);
+</script>
+
+
+<script>
+  function yideng1(a, b, c) {
+    console.log(this.length); // 4 (arguments.length: fn1的实参个数4)
+    console.log(this.callee.length); // 1 (arguments.callee.length: fn1.length fn1的形参个数1)
+    console.log(arguments.callee.length); // 3
+  }
+  function fn1(d) {
+    arguments[0](10, 20, 30, 40, 50);
+  }
+  fn1(yideng1, 10, 20, 30);
+</script>
+</body>
+</html>

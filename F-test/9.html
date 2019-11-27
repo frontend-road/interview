@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+<script>
+// 请先书写如下代码执行结果，并用ES5实现ES6 Promise A+规范的代码
+// 同时解释下如何使用Promise完成事物的操作么
+const pro = new Promise((resolve, reject) => {
+  const innerpro = new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve(1);
+    });
+    console.log(2);
+    resolve(3);
+  })
+  innerpro.then(res => console.log(res));
+  resolve(4);
+  console.log('hello world');
+});
+pro.then(res => console.log(res));
+console.log('end');
+
+// 2
+// hello world
+// end
+// 3
+// 4
+</script>
+</body>
+</html>
