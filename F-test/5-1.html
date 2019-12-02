@@ -8,6 +8,67 @@
 </head>
 <body>
 <script>
+  console.log(a); // undefined
+  console.log(test); // undefined
+
+  // if (true) {
+  //   var a = 1;
+  //   const b = 2;
+  //   function test() {}
+  //   test = 3;
+  //   console.log(typeof test); // number
+  // }
+
+  // for (let index = 0; index < 3; index++) {
+  //   var a = 1;
+  //   const b = 2;
+  //   function test() {}
+  //   test = 3;
+  //   console.log(typeof test); // number
+  // }
+
+  // switch (1) {
+  //   case 1:
+  //     var a = 1;
+  //     const b = 2;
+  //     function test() {}
+  //     test = 3;
+  //     console.log(typeof test); // number
+  //     break;
+  //   default:
+  //     console.log('default');
+  //     break;
+  // }
+
+  // try {
+  //   var a = 1;
+  //   const b = 2;
+  //   function test() {}
+  //   test = 3;
+  //   console.log(typeof test); // number
+  // } catch (error) {
+  //   console.log('try catch error...');
+  // }
+
+  // try {
+  //   throw new Error('something goes wrong');
+  // } catch (error) {
+  //   console.log('try catch error...', error.message);
+  //   var a = 1;
+  //   const b = 2;
+  //   function test() {}
+  //   test = 3;
+  //   console.log(typeof test); // number
+  // }
+
+  // with ({}) {
+  //   var a = 1;
+  //   const b = 2;
+  //   function test() {}
+  //   test = 3;
+  //   console.log(typeof test); // number
+  // }
+
   {
     var a = 1;
     const b = 2;
@@ -15,6 +76,7 @@
     test = 3;
     console.log(typeof test); // number
   }
+
   console.log(a); // 1
   console.log(typeof test); // function
   console.log(b); // ReferenceError
