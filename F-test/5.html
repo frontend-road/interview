@@ -7,6 +7,32 @@
   <title>Document</title>
 </head>
 <body>
+<script>
+  {
+    var a = 1;
+    const b = 2;
+    function test() {}
+    test = 3;
+    console.log(typeof test); // number
+  }
+  // (function() {
+  //   var a = 1;
+  //   const b = 2;
+  //   function test() {}
+  //   test = 3;
+  //   console.log(typeof test); // number
+  // })();
+  console.log(a); // 1
+  console.log(typeof test); // function
+  // console.log(b); // ReferenceError
 
+  var revocable = Proxy.revocable({}, {
+    get: function(target, name) {
+      return "[[" + name + "]]";
+    }
+  });
+  var proxy = revocable.proxy;
+  console.log(proxy.foo); // "[[foo]]"
+</script>
 </body>
 </html>

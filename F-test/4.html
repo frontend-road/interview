@@ -14,12 +14,21 @@
   var yideng = new Person();
   console.log(Person.a); // a1
   console.log(yideng.a); // a
+  console.log(yideng)
   // yideng.__proto__ === Person.prototype
   // yideng.__proto__.__proto__ === Object.prototype
   console.log(yideng.__proto__.__proto__.constructor); // Object
   // console.log(yideng.__proto__.__proto__.constructor.constructor.constructor);
-  // console.log(1..a);
-  // console.log(1.a);
+  console.log(1..a); // a
+  console.log(Number(1).a); // a
+  console.log((1).a); // a
+  // console.log(1.a); // 报错
+
+  Function.prototype.name = 'hello';
+  function test() {}
+  test.name = 'world';
+  console.log(test.name); // test
+  console.log(Object.getOwnPropertyDescriptor(test, 'name')); // { value: 'test', writable: false, enumerable: false, configurable: true }
 </script>
 </body>
 </html>
