@@ -23,7 +23,7 @@ var c = {
   }
 };
 console.log(+c); // hint: number
-console.log(Number(c)); // hint: number÷
+console.log(Number(c)); // hint: number
 console.log('' + c); // hint: default
 console.log(`${c}`); // hint: string
 console.log(String(c)); // hint: string
@@ -36,7 +36,6 @@ console.log('----------------');
 // var a = 1;
 var a = {
   // [Symbol.toPrimitive]: (function(i) {
-  //   // console.log('hint----', hint);
   //   console.log('i---', i);
   //   return function() {
   //     return ++i;

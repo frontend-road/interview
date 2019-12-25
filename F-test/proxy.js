@@ -21,6 +21,24 @@ console.log(personProxy.age); // get
 
 console.log('----------------');
 
+// tree
+function Tree() {
+  return new Proxy({}, {
+    get(target, key, receiver) {
+      // console.log(target, key, receiver);
+      if (!(key in target)) {
+        target[key] = Tree();
+      }
+      return Reflect.get(target, key, receiver);
+    }
+  });
+}
+var tree = Tree();
+tree.class.student.a = 'zhang';
+console.log('tree:', tree);
+
+console.log('----------------');
+
 // 单例
 class Test {
   constructor(name) {
@@ -123,19 +141,3 @@ asyncFuncProxy(callback2);
 asyncFuncProxy(callback2);
 
 console.log('----------------');
-
-// tree
-function Tree() {
-  return new Proxy({}, {
-    get(target, key, receiver) {
-      // console.log(target, key, receiver);
-      if (!(key in target)) {
-        target[key] = Tree();
-      }
-      return Reflect.get(target, key, receiver);
-    }
-  });
-}
-var tree = Tree();
-tree.class.student.a = 'zhang';
-console.log('tree:', tree);
